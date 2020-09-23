@@ -6,7 +6,8 @@
 void how_to_play() {// function that prints the information about gameplay
     
     printf(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n");
-    printf("Type the area first, then type X or O\n\n");
+    printf("Type the area u want to play when it's your turn\n");
+    printf("Player 1: X, Player 2: O\n\n");
     
 }
 
