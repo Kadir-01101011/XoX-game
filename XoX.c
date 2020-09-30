@@ -40,7 +40,7 @@ void move_X (int index) {
     }
 }
 
-void move_O (int index) {
+void move_O (int index) { // will be AI
     if (move[index-1] == ' ')
         move[index-1] = 'O';
     else {
