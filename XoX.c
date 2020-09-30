@@ -3,7 +3,7 @@
 
 char room[9];
 
-void how_to_play() {// function that prints the information about gameplay
+void how_to_play() {    // function that prints the information about gameplay
     printf(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n");
     printf("Type the room you want to play when it's your turn\n");
     printf("You can only type on a room that is empty.\n");
@@ -40,7 +40,7 @@ void move_X (int index) {
     }
 }
 
-void move_O (int index) { // will be AI
+void move_O (int index) {   // will be AI
     if (room[index-1] == ' ')
         room[index-1] = 'O';
     else {
