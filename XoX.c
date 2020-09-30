@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char move[9];
+char room[9];
 
 void how_to_play() {// function that prints the information about gameplay
     printf(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n");
@@ -11,11 +11,11 @@ void how_to_play() {// function that prints the information about gameplay
 }
 
 void print_table() {    // function that prints the table on which game is played
-  printf(" %c | %c | %c \n", move[0], move[1], move[2]);
+  printf(" %c | %c | %c \n", room[0], room[1], room[2]);
   printf("-----------\n");
-  printf(" %c | %c | %c \n", move[3], move[4], move[5]);
+  printf(" %c | %c | %c \n", room[3], room[4], room[5]);
   printf("-----------\n");
-  printf(" %c | %c | %c \n", move[6], move[7], move[8]);
+  printf(" %c | %c | %c \n", room[6], room[7], room[8]);
 }
 
 int which_room() {  // function that takes and returns the area of the next move
@@ -32,8 +32,8 @@ int which_room() {  // function that takes and returns the area of the next move
 }
 
 void move_X (int index) {
-    if (move[index-1] == ' ')
-        move[index-1] = 'X';
+    if (room[index-1] == ' ')
+        room[index-1] = 'X';
     else {
         printf("You can't type upon your friends room. Please try again.\n");
         move_X(which_room());
@@ -41,8 +41,8 @@ void move_X (int index) {
 }
 
 void move_O (int index) { // will be AI
-    if (move[index-1] == ' ')
-        move[index-1] = 'O';
+    if (room[index-1] == ' ')
+        room[index-1] = 'O';
     else {
         printf("You can't type upon your friends room. Please try again.\n");
         move_O(which_room());
@@ -55,7 +55,7 @@ int main() {
     how_to_play();
     
     for (int n = 0; n < 9; n++) {
-        move[n] = ' ';
+        room[n] = ' ';
     }
     
     for (int order = 0; order < 9; order++) {
