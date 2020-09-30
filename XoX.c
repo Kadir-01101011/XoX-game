@@ -1,55 +1,54 @@
 #include <stdio.h>
 
-#define COLUMN 11
-#define ROW 5
+char move[9];
 
 void how_to_play() {// function that prints the information about gameplay
     
     printf(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n");
-    printf("Type the area u want to play when it's your turn\n");
+    printf("Type the room you want to play when it's your turn\n");
+    printf("You can only type on a room that is empty.\n");
     printf("Player 1: X, Player 2: O\n\n");
-    
 }
 
-void print_table(char table[ROW][COLUMN]) {    // function that prints the table on which game is played
+void print_table() {    // function that prints the table on which game is played
   
-  for (int i = 0; i < ROW; i++) {
-    for (int n = 0; n < COLUMN; n++) {
-      printf("%c", table[i][n]);
-    }
-  printf("\n");
-  }
+  printf(" %c | %c | %c \n", move[0], move[1], move[2]);
+  printf("-----------\n");
+  printf(" %c | %c | %c \n", move[3], move[4], move[5]);
+  printf("-----------\n");
+  printf(" %c | %c | %c \n", move[6], move[7], move[8]);
+  
 }
 
 int which_room() {  // function that takes and returns the area of the next move
     int num = 0;
-    printf("which room you're gonna type on?_");
+    printf("Which room you're gonna type on?_");
     scanf("%d", &num);
-    return num;
+    
+    if (num <= 9 && num >= 1)
+        return num;
+    else {
+        printf("\nType a number between 1-9");
+        which_room();
+    }
 }
 
-void move_X (int index, char *ptrX) {
-    if (index == 1)         *(ptrX+0*COLUMN+1) = 'X';
-    else if (index == 2)    *(ptrX+0*COLUMN+5) = 'X';
-    else if (index == 3)    *(ptrX+0*COLUMN+9) = 'X';
-    else if (index == 4)    *(ptrX+2*COLUMN+1) = 'X';
-    else if (index == 5)    *(ptrX+2*COLUMN+5) = 'X';
-    else if (index == 6)    *(ptrX+2*COLUMN+9) = 'X';
-    else if (index == 7)    *(ptrX+4*COLUMN+1) = 'X';
-    else if (index == 8)    *(ptrX+4*COLUMN+5) = 'X';
-    else if (index == 9)    *(ptrX+4*COLUMN+9) = 'X';
+void move_X (int index) {
+    if (move[index-1] == ' ')
+        move[index-1] = 'X';
+    else {
+        printf("You can't type upon your friends room. Please try again.\n");
+        move_X(which_room());
+    }
 }
 
-void move_O (int index, char *ptrO) {
-    if (index == 1)         *(ptrO+0*COLUMN+1) = 'O';
-    else if (index == 2)    *(ptrO+0*COLUMN+5) = 'O';
-    else if (index == 3)    *(ptrO+0*COLUMN+9) = 'O';
-    else if (index == 4)    *(ptrO+2*COLUMN+1) = 'O';
-    else if (index == 5)    *(ptrO+2*COLUMN+5) = 'O';
-    else if (index == 6)    *(ptrO+2*COLUMN+9) = 'O';
-    else if (index == 7)    *(ptrO+4*COLUMN+1) = 'O';
-    else if (index == 8)    *(ptrO+4*COLUMN+5) = 'O';
-    else if (index == 9)    *(ptrO+4*COLUMN+9) = 'O';
+void move_O (int index) {
+    if (move[index-1] == ' ')
+        move[index-1] = 'O';
+    else {
+        printf("You can't type upon your friends room.Please try again.\n");
+        move_O(which_room());
+    }
 }
 
 
@@ -57,29 +56,16 @@ int main() {
     
     how_to_play();
     
-    int k, m;
-    char pattern[ROW][COLUMN];
-    
-    for(k = 0; k < ROW; k++) {
-        for(m = 0; m < COLUMN; m++) {
-            if (k % 2 != 0)
-                pattern[k][m] = '-';
-            else if (k % 2 == 0 && (m == 3 || m == 7)) 
-                pattern[k][m] = '|';
-            else
-                pattern[k][m] = ' ';
-        }
+    for (int n = 0; n < 9; n++) {
+        move[n] = ' ';
     }
-    
-    //  char *patternptr = &pattern;
-  
     for (int order = 0; order < 9; order++) {
         int turn = (order % 2) + 1;
         printf("Player %d's turn: \n", turn);
-        if (turn ==1)   move_X(which_room(), &pattern[0][0]);
-        else            move_O(which_room(), &pattern[0][0]);
+        if (turn ==1)   move_X(which_room());
+        else            move_O(which_room());
         
-        print_table(pattern);
+        print_table();
     }
     
     return 0;
