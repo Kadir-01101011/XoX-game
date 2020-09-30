@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 char move[9];
 
@@ -63,6 +64,8 @@ int main() {
         if (turn ==1)   move_X(which_room());
         else            move_O(which_room());
         
+        system("clear");
+        how_to_play();
         print_table();
     }
     
