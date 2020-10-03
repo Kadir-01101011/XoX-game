@@ -15,7 +15,7 @@ void machine() {
   int place;
   
   // TODO: AI
-  place = 5;
+  place = 4;
   
   room[place] = 'O';
 }
@@ -44,6 +44,7 @@ int is_finished() {
         room[0] == room[4] && room[0] == room[8] && room[0] == 'X' ||   // cross
         room[2] == room[4] && room[2] == room[6] && room[2] == 'X') {
             
+        system("clear");
         printf("Player is the winner!\n");
         return 1;
     }
@@ -56,6 +57,7 @@ int is_finished() {
             room[0] == room[4] && room[0] == room[8] && room[0] == 'O' ||   // cross
             room[2] == room[4] && room[2] == room[6] && room[2] == 'O') {
             
+        system("clear");
         printf("Machine is the winner!\n");
         return 1;
     }
@@ -73,11 +75,14 @@ int main() {
         print_table();
       
         play();
-        if (is_finished() == 1) { print_table();  return 0; }
+        if (is_finished() == 1) { return 0; }
+        
         machine();
-        if (is_finished() == 1) { print_table();  return 0; }
+        if (is_finished() == 1) { return 0; }
       
     }
+  
+    print_table();
     
     return 0;
     
