@@ -18,34 +18,18 @@ void print_table() {    // function that prints the table on which game is playe
   printf(" %c | %c | %c \n", room[6], room[7], room[8]);
 }
 
-int which_room() {  // function that takes and returns the area of the next move
+void play(int order) {  // function that takes and returns the area of the next move
     int num = 0;
     printf("Which room you're gonna type on?_");
     scanf("%d", &num);
     
-    if (num <= 9 && num >= 1)
-        return num;
-    else {
-        printf("\nType a number between 1-9");
-        which_room();
+    if (num <= 9 && num >= 1 && room[num-1] == ' ') {
+        if(order == 1)    room[num-1] = 'X';
+        else              room[num-1] = 'O';
     }
-}
-
-void move_X (int index) {
-    if (room[index-1] == ' ')
-        room[index-1] = 'X';
     else {
-        printf("You can't type upon your friends room. Please try again.\n");
-        move_X(which_room());
-    }
-}
-
-void move_O (int index) {   // will be AI
-    if (room[index-1] == ' ')
-        room[index-1] = 'O';
-    else {
-        printf("You can't type upon your friends room. Please try again.\n");
-        move_O(which_room());
+        printf("\nType a number between 1-9 whose room is empty.\n");
+        pleay(order);
     }
 }
 
@@ -78,21 +62,17 @@ int is_finished() {
 }
 
 int main() {
-    
-    how_to_play();
-    
+        
     for (int n = 0; n < 9; n++) {
         room[n] = ' ';
     }
     
-    for (int order = 0; order < 9; order++) {
-        int turn = (order % 2) + 1;
+    for (int i = 0; i < 9; i++) {
+        int turn = (i % 2) + 1;
         printf("Player %d's turn: \n", turn);
-        if (turn ==1)   move_X(which_room());
-        else            move_O(which_room());
+        play(turn);
         
         system("clear");
-        how_to_play();
         print_table();
         
         if (order > 3) {
