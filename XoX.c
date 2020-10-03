@@ -3,13 +3,6 @@
 
 char room[9];
 
-void how_to_play() {    // function that prints the information about gameplay
-    printf(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\n");
-    printf("Type the room you want to play when it's your turn\n");
-    printf("You can only type on a room that is empty.\n");
-    printf("Player 1: X, Player 2: O\n\n");
-}
-
 void print_table() {    // function that prints the table on which game is played
   printf(" %c | %c | %c \n", room[0], room[1], room[2]);
   printf("-----------\n");
@@ -66,6 +59,7 @@ int main() {
     for (int n = 0; n < 9; n++) {
         room[n] = ' ';
     }
+    print_table();
     
     for (int i = 0; i < 9; i++) {
         int turn = (i % 2) + 1;
