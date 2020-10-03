@@ -33,30 +33,36 @@ void play(int order) {  // function that takes and returns the area of the next 
     }
 }
 
-/*    
-void move_X (int index) {
-    if (room[index-1] == ' ')
-        room[index-1] = 'X';
-    else {
-        printf("You can't type upon your friends room. Please try again.\n");
-        move_X(which_room());
+int is_finished() {
+    if (room[0] == room[1] && room[0] == room[2] && room[0] == 'X' ||
+        room[3] == room[4] && room[3] == room[5] && room[3] == 'X' ||
+        room[6] == room[7] && room[6] == room[8] && room[6] == 'X' ||
+        room[0] == room[3] && room[0] == room[6] && room[0] == 'X' ||
+        room[1] == room[4] && room[1] == room[7] && room[1] == 'X' ||
+        room[2] == room[5] && room[2] == room[8] && room[2] == 'X' ||
+        room[0] == room[4] && room[0] == room[8] && room[0] == 'X' ||
+        room[2] == room[4] && room[2] == room[6] && room[2] == 'X') {
+            
+        printf("Player 1 is the winner!\n");
+        return 1;
     }
-}
-
-void move_O (int index) {   // will be AI
-    if (room[index-1] == ' ')
-        room[index-1] = 'O';
-    else {
-        printf("You can't type upon your friends room. Please try again.\n");
-        move_O(which_room());
+    else if (room[0] == room[1] && room[0] == room[2] && room[0] == 'O' ||
+            room[3] == room[4] && room[3] == room[5] && room[3] == 'O' ||
+            room[6] == room[7] && room[6] == room[8] && room[6] == 'O' ||
+            room[0] == room[3] && room[0] == room[6] && room[0] == 'O' ||
+            room[1] == room[4] && room[1] == room[7] && room[1] == 'O' ||
+            room[2] == room[5] && room[2] == room[8] && room[2] == 'O' ||
+            room[0] == room[4] && room[0] == room[8] && room[0] == 'O' ||
+            room[2] == room[4] && room[2] == room[6] && room[2] == 'O') {
+            
+        printf("Player 2 is the winner!\n");
+        return 1;
     }
+    else    return 0;
 }
-*/
 
 int main() {
-    
-    how_to_play();
-    
+        
     for (int n = 0; n < 9; n++) {
         room[n] = ' ';
     }
@@ -67,8 +73,14 @@ int main() {
         play(turn);
         
         system("clear");
-        how_to_play();
         print_table();
+        
+        if (order > 3) {
+            if (is_finished() == 1) {                
+                printf("Congrats to the winner.\n");
+                return 0;
+            }       
+        }
     }
     
     return 0;
