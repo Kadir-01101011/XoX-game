@@ -17,7 +17,7 @@ void machine() {
   // TODO: AI
   place = 5;
   
-  room[place] = "O";
+  room[place] = 'O';
 }
 
 void play() {  // function that takes and returns the area of the next move
