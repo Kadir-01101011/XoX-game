@@ -11,18 +11,26 @@ void print_table() {    // function that prints the table on which game is playe
   printf(" %c | %c | %c \n", room[6], room[7], room[8]);
 }
 
-void play(int order) {  // function that takes and returns the area of the next move
+void machine() {
+  int place;
+  
+  // TODO: AI
+  place = 5;
+  
+  room[place] = "O";
+}
+
+void play() {  // function that takes and returns the area of the next move
     int num = 0;
     printf("Which room you're gonna type on?_");
     scanf("%d", &num);
     
     if (num <= 9 && num >= 1 && room[num-1] == ' ') {
-        if(order == 1)    room[num-1] = 'X';
-        else              room[num-1] = 'O';
+        room[num-1] = 'X';
     }
     else {
         printf("\nType a number between 1-9 whose room is empty.\n");
-        play(order);
+        play();
     }
 }
 
@@ -36,7 +44,7 @@ int is_finished() {
         room[0] == room[4] && room[0] == room[8] && room[0] == 'X' ||   // cross
         room[2] == room[4] && room[2] == room[6] && room[2] == 'X') {
             
-        printf("Player 1 is the winner!\n");
+        printf("Player is the winner!\n");
         return 1;
     }
     else if (room[0] == room[1] && room[0] == room[2] && room[0] == 'O' ||  // horizontal
@@ -48,7 +56,7 @@ int is_finished() {
             room[0] == room[4] && room[0] == room[8] && room[0] == 'O' ||   // cross
             room[2] == room[4] && room[2] == room[6] && room[2] == 'O') {
             
-        printf("Player 2 is the winner!\n");
+        printf("Machine is the winner!\n");
         return 1;
     }
     else    return 0;
@@ -59,22 +67,16 @@ int main() {
     for (int n = 0; n < 9; n++) {
         room[n] = ' ';
     }
-    print_table();
     
     for (int i = 0; i < 9; i++) {
-        int turn = (i % 2) + 1;
-        printf("Player %d's turn: \n", turn);
-        play(turn);
-        
         system("clear");
         print_table();
-        
-        if (i > 3) {
-            if (is_finished() == 1) {                
-                printf("Congrats to the winner.\n");
-                return 0;
-            }       
-        }
+      
+        play();
+        if (is_finished() == 1) return 0;
+        machine();
+        if (is_finished() == 1) return 0;
+      
     }
     
     return 0;
