@@ -49,6 +49,33 @@ void move_O (int index) {   // will be AI
     }
 }
 
+int is_finished() {
+    if (room[0] == room[1] && room[0] == room[2] && room[0] == 'X' ||
+        room[3] == room[4] && room[3] == room[5] && room[3] == 'X' ||
+        room[6] == room[7] && room[6] == room[8] && room[6] == 'X' ||
+        room[0] == room[3] && room[0] == room[6] && room[0] == 'X' ||
+        room[1] == room[4] && room[1] == room[7] && room[1] == 'X' ||
+        room[2] == room[5] && room[2] == room[8] && room[2] == 'X' ||
+        room[0] == room[4] && room[0] == room[8] && room[0] == 'X' ||
+        room[2] == room[4] && room[2] == room[6] && room[2] == 'X') {
+            
+        printf("Player 1 is the winner!\n");
+        return 1;
+    }
+    else if (room[0] == room[1] && room[0] == room[2] && room[0] == 'O' ||
+            room[3] == room[4] && room[3] == room[5] && room[3] == 'O' ||
+            room[6] == room[7] && room[6] == room[8] && room[6] == 'O' ||
+            room[0] == room[3] && room[0] == room[6] && room[0] == 'O' ||
+            room[1] == room[4] && room[1] == room[7] && room[1] == 'O' ||
+            room[2] == room[5] && room[2] == room[8] && room[2] == 'O' ||
+            room[0] == room[4] && room[0] == room[8] && room[0] == 'O' ||
+            room[2] == room[4] && room[2] == room[6] && room[2] == 'O') {
+            
+        printf("Player 2 is the winner!\n");
+        return 1;
+    }
+    else    return 0;
+}
 
 int main() {
     
@@ -67,6 +94,13 @@ int main() {
         system("clear");
         how_to_play();
         print_table();
+        
+        if (order > 3) {
+            if (is_finished() == 1) {                
+                printf("Congrats to the winner.\n");
+                return 0;
+            }       
+        }
     }
     
     return 0;
