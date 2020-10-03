@@ -75,10 +75,10 @@ int main() {
         print_table();
       
         play();
-        if (is_finished() == 1) { return 0; }
+        if (is_finished() == 1) { break; }
         
         machine();
-        if (is_finished() == 1) { return 0; }
+        if (is_finished() == 1) { break; }
       
     }
   
