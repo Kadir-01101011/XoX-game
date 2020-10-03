@@ -29,7 +29,7 @@ void play(int order) {  // function that takes and returns the area of the next 
     }
     else {
         printf("\nType a number between 1-9 whose room is empty.\n");
-        pleay(order);
+        play(order);
     }
 }
 
@@ -75,7 +75,7 @@ int main() {
         system("clear");
         print_table();
         
-        if (order > 3) {
+        if (i > 3) {
             if (is_finished() == 1) {                
                 printf("Congrats to the winner.\n");
                 return 0;
