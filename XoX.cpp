@@ -18,7 +18,7 @@ void play(int order) {
     cin >> num;
     
     if(num <= 9 && num >=0 && room[num-1] == ' ') {
-        if(order == 1)  room[num-1] = 'X';
+        if(order == 0)  room[num-1] = 'X';
         else            room[num-1] = 'O';
     }
     else {
@@ -37,7 +37,7 @@ bool is_finished() {
         room[0] == room[4] && room[0] == room[8] && room[0] == 'X' ||   // cross
         room[2] == room[4] && room[2] == room[6] && room[2] == 'X') {
         
-        cout << "Player 1 is the winner!" << endl;    
+        cout << "Player 1 (X) is the winner!" << endl;    
         return true;
     }
     else if (room[0] == room[1] && room[0] == room[2] && room[0] == 'O' ||  // horizontal
@@ -49,7 +49,7 @@ bool is_finished() {
             room[0] == room[4] && room[0] == room[8] && room[0] == 'O' ||   // cross
             room[2] == room[4] && room[2] == room[6] && room[2] == 'O') {
             
-        cout << "Player 2 is the winner!" << endl;
+        cout << "Player 2 (O) is the winner!" << endl;
         return true;
     }
     else    return false;
@@ -62,7 +62,7 @@ int main() {
     print_table();
     
     for(int i = 0; i < 9; i++) {
-        int turn = (i%2) + 1;
+        int turn = i%2;
         cout << player[turn] << " is playing;\n";
         
         play(turn);
@@ -76,5 +76,8 @@ int main() {
             }
         }
     }
+    cout << "No winner! Let's play one more.\n";
+
+    
     return 0;
 }
